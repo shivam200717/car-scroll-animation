@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Welcome Itz Fizz – Scroll Hero</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  html,body{margin:0;background:#07080f;color:#fff;font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
+  .hero{height:100vh;height:100svh;position:relative;overflow:hidden;background:linear-gradient(#0a0c1c,#1a1740 60%,#3a1f4d)}
+  .dawn{position:absolute;inset:0;background:linear-gradient(#1d2f5c,#e8825a 85%,#ffd08a);opacity:0;will-change:opacity}
+  .layer{position:absolute;left:0;bottom:0;width:200%;will-change:transform}
+  .char{display:inline-block;will-change:transform,opacity;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35)}
+  .char.on{color:#fff;-webkit-text-stroke:0}
+  .stat,#car,.beam,.lines{will-change:transform,opacity}
+  .star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff}
+  .glass{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px)}
+  .road{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(#14151f,#07080f)}
+  .dash{position:absolute;top:18%;left:0;width:200%;height:4px;background:repeating-linear-gradient(90deg,#aab2d5 0 70px,transparent 70px 170px);will-change:transform}
+</style>
+</head>
+<body>
+<section class="hero" id="hero">
+  <div class="dawn" id="dawn"></div>
+  <div id="stars"></div>
+  <div class="absolute rounded-full" id="sun" style="width:180px;height:180px;left:70%;bottom:-10%;background:radial-gradient(circle,#fff6d6,#ffb86b 55%,transparent 72%);opacity:.0"></div>
+
+  <svg class="layer" id="far" viewBox="0 0 2000 300" preserveAspectRatio="none" style="height:38%;bottom:20%;opacity:.5"></svg>
+  <svg class="layer" id="near" viewBox="0 0 2000 300" preserveAspectRatio="none" style="height:30%;bottom:20%"></svg>
+
+  <div class="absolute inset-x-0 top-[9%] px-4 text-center">
+    <p class="mb-4 text-[10px] md:text-xs tracking-[.6em] text-sky-300/70" id="eyebrow">SCROLL TO DRIVE</p>
+    <h1 id="headline" class="text-[22px] sm:text-4xl md:text-6xl font-bold" style="letter-spacing:.45em">WELCOME ITZ FIZZ</h1>
+  </div>
+
+  <div class="absolute inset-x-0 top-[30%] px-4">
+    <div class="mx-auto grid max-w-4xl grid-cols-3 gap-3 md:gap-5">
+      <div class="stat glass rounded-2xl p-3 md:p-5 text-center"><div class="text-2xl md:text-5xl font-extrabold text-sky-300"><span data-n="70">0</span>%</div><p class="mt-1 text-[10px] md:text-sm text-slate-300">Faster page loads</p></div>
+      <div class="stat glass rounded-2xl p-3 md:p-5 text-center"><div class="text-2xl md:text-5xl font-extrabold text-sky-300"><span data-n="85">0</span>%</div><p class="mt-1 text-[10px] md:text-sm text-slate-300">Engagement uplift</p></div>
+      <div class="stat glass rounded-2xl p-3 md:p-5 text-center"><div class="text-2xl md:text-5xl font-extrabold text-sky-300"><span data-n="92">0</span>%</div><p class="mt-1 text-[10px] md:text-sm text-slate-300">Customer satisfaction</p></div>
+    </div>
+  </div>
+
+  <div class="road"><div class="dash" id="dash"></div></div>
+
+  <div class="absolute left-0 w-full" style="bottom:15%">
+    <div id="carIntro" class="absolute left-0 bottom-0">
+      <div id="carMouse"><div id="car" class="relative">
+        <div class="lines absolute right-full top-1/2 w-48 -translate-y-1/2 opacity-0">
+          <div class="mb-3 h-[2px] bg-gradient-to-l from-white/70 to-transparent"></div>
+          <div class="mb-3 ml-8 h-[2px] bg-gradient-to-l from-white/50 to-transparent"></div>
+          <div class="h-[2px] bg-gradient-to-l from-white/60 to-transparent"></div>
+        </div>
+        <div class="beam absolute left-[92%] top-[38%] h-24 w-[420px] opacity-0" style="background:linear-gradient(90deg,rgba(255,240,180,.55),transparent);clip-path:polygon(0 30%,100% 0,100% 100%,0 70%)"></div>
+        <svg viewBox="0 0 360 120" class="w-[250px] md:w-[400px] relative" aria-label="Sports car">
+          <defs>
+            <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0369a1"/></linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f2fe" stop-opacity=".9"/><stop offset="1" stop-color="#0c4a6e"/></linearGradient>
+          </defs>
+          <ellipse cx="180" cy="112" rx="165" ry="6" fill="#000" opacity=".45"/>
+          <path d="M14 84 Q12 66 30 62 L82 54 L122 26 Q130 20 142 20 L214 20 Q228 20 238 30 L262 54 L318 60 Q346 64 346 84 L346 90 L14 90 Z" fill="url(#body)"/>
+          <path d="M128 30 L208 30 Q218 30 224 36 L246 54 L100 54 Z" fill="url(#glass)"/>
+          <path d="M168 30 L172 54" stroke="#0b0d12" stroke-width="3" opacity=".5"/>
+          <rect x="332" y="66" width="14" height="8" rx="3" fill="#fff7c2"/>
+          <rect x="14" y="66" width="10" height="8" rx="3" fill="#ef4444"/>
+          <path d="M100 76 H300" stroke="#e0f2fe" stroke-width="2" opacity=".5"/>
+          <g class="wheel" id="wheelA"><circle cx="90" cy="92" r="24" fill="#0b0d12"/><circle cx="90" cy="92" r="21" fill="none" stroke="#1f2937" stroke-width="2"/><circle cx="90" cy="73" r="2.5" fill="#ef4444"/><circle cx="90" cy="92" r="15" fill="#94a3b8"/><path d="M90 79V105M77 92H103M81 83L99 101M99 83L81 101" stroke="#0b0d12" stroke-width="3"/></g>
+          <g class="wheel" id="wheelB"><circle cx="270" cy="92" r="24" fill="#0b0d12"/><circle cx="270" cy="92" r="21" fill="none" stroke="#1f2937" stroke-width="2"/><circle cx="270" cy="73" r="2.5" fill="#ef4444"/><circle cx="270" cy="92" r="15" fill="#94a3b8"/><path d="M270 79V105M257 92H283M261 83L279 101M279 83L261 101" stroke="#0b0d12" stroke-width="3"/></g>
+        </svg>
+      </div></div>
+    </div>
+  </div>
+  <p class="absolute bottom-4 inset-x-0 text-center text-[10px] tracking-[.5em] text-slate-400" id="hint">↓ SCROLL</p>
+</section>
+
+<section class="mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 py-24">
+  <h2 class="reveal mb-10 text-3xl md:text-5xl font-bold">Built for motion. Tuned for speed.</h2>
+  <div class="grid gap-5 md:grid-cols-3">
+    <div class="reveal glass rounded-2xl p-6"><h3 class="mb-2 font-semibold text-sky-300">Scroll-scrubbed</h3><p class="text-sm text-slate-400">Every movement is tied to scroll progress and eased with GSAP scrub.</p></div>
+    <div class="reveal glass rounded-2xl p-6"><h3 class="mb-2 font-semibold text-sky-300">Transform only</h3><p class="text-sm text-slate-400">Only transform and opacity are animated, so there are no reflows.</p></div>
+    <div class="reveal glass rounded-2xl p-6"><h3 class="mb-2 font-semibold text-sky-300">Layered parallax</h3><p class="text-sm text-slate-400">Sky, skyline and road move at different speeds for depth.</p></div>
+  </div>
+</section>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- build scenery ---------- */
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const stars = document.getElementById('stars');
+for (let i = 0; i < 70; i++) {
+  const s = document.createElement('i'); s.className = 'star';
+  s.style.cssText = `left:${rnd()*100}%;top:${rnd()*55}%;opacity:${.3+rnd()*.7}`;
+  stars.appendChild(s);
+}
+function skyline(id, color, minH, maxH) {
+  let x = 0, out = '';
+  while (x < 2000) {
+    const w = 40 + rnd() * 70, h = minH + rnd() * (maxH - minH);
+    out += `<rect x="${x}" y="${300 - h}" width="${w}" height="${h}" fill="${color}"/>`;
+    x += w + 4;
+  }
+  document.getElementById(id).innerHTML = out;
+}
+skyline('far', '#2a2f5a', 60, 200);
+skyline('near', '#10121f', 40, 150);
+
+/* ---------- headline letters ---------- */
+const h = document.getElementById('headline');
+h.innerHTML = [...h.textContent].map(c =>
+  `<span class="char">${c === ' ' ? '&nbsp;&nbsp;' : c}</span>`).join('');
+const chars = gsap.utils.toArray('.char');
+
+/* ---------- intro ---------- */
+const startX = () => innerWidth * 0.06;
+const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+gsap.set('#carIntro', { x: -500 });
+intro
+  .from(chars, { y: 30, opacity: 0, duration: .9, stagger: .04 })
+  .from('#eyebrow', { opacity: 0, y: -10, duration: .8 }, 0.2)
+  .from('.stat', { y: 30, opacity: 0, duration: .8, stagger: .25 }, '-=.3')
+  .to('#carIntro', { x: startX, duration: 1.4, ease: 'power2.out' }, '-=.9');
+document.querySelectorAll('[data-n]').forEach((el, i) => {
+  const o = { v: 0 };
+  intro.to(o, { v: +el.dataset.n, duration: 1.6, ease: 'power2.out',
+    onUpdate: () => el.textContent = Math.round(o.v) }, 0.9 + i * .25);
+});
+
+if (!reduce) {
+  /* ---------- mouse parallax on car ---------- */
+  const mx = gsap.quickTo('#carMouse', 'x', { duration: .8, ease: 'power3' });
+  const my = gsap.quickTo('#carMouse', 'y', { duration: .8, ease: 'power3' });
+  addEventListener('pointermove', e => {
+    mx((e.clientX / innerWidth - .5) * 14);
+    my((e.clientY / innerHeight - .5) * 6);
+  });
+
+  /* ---------- scroll timeline ---------- */
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=220%', pin: true, scrub: 1.2, invalidateOnRefresh: true }
+  });
+
+  // Rolling without slipping: turns = distance / (2πr), r scaled from SVG units to px
+  const travel = () => innerWidth - startX() + 60;
+  const wheelSpin = () => {
+    const scale = document.querySelector('#car svg').getBoundingClientRect().width / 360;
+    return (travel() / (2 * Math.PI * 24 * scale)) * 360;
+  };
+
+  tl.to('#car', { x: travel, duration: 1 }, 0)
+    .to('#wheelA', { rotation: wheelSpin, svgOrigin: '90 92', duration: 1, ease: 'none' }, 0)
+    .to('#wheelB', { rotation: wheelSpin, svgOrigin: '270 92', duration: 1, ease: 'none' }, 0)
+    .to('#dash', { xPercent: -30, duration: 1 }, 0)
+    .to('#near', { xPercent: -30, duration: 1 }, 0)
+    .to('#far', { xPercent: -12, duration: 1 }, 0)
+    .to('#stars', { y: 60, opacity: .2, duration: 1 }, 0)
+    .to('#dawn', { opacity: 1, duration: 1 }, 0)
+    .to('#sun', { opacity: 1, y: -260, duration: 1 }, 0.1)
+    .to('.beam', { opacity: 1, duration: .15 }, 0)
+    .to('.beam', { opacity: 0, duration: .2 }, 0.75)
+    .to('.lines', { opacity: 1, duration: .2 }, 0.15)
+    .to('.lines', { opacity: 0, duration: .2 }, 0.8)
+    .to('#hint,#eyebrow', { opacity: 0, duration: .1 }, 0)
+    .to('.stat', { y: -18, duration: 1 }, 0);
+
+  // Letters fill in as the car passes (works in both scroll directions)
+  tl.eventCallback('onUpdate', () => {
+    const p = tl.progress();
+    chars.forEach((c, i) => c.classList.toggle('on', p >= .1 + (i / chars.length) * .8));
+  });
+
+  /* ---------- reveal on later section ---------- */
+  gsap.from('.reveal', { y: 40, opacity: 0, duration: .9, ease: 'power3.out', stagger: .15,
+    scrollTrigger: { trigger: '.reveal', start: 'top 85%' } });
+} else {
+  chars.forEach(c => c.classList.add('on'));
+}
+</script>
+</body>
+</html>
